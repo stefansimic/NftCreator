@@ -10,6 +10,7 @@ public class ImageService {
 	private Model model;
 	private RandomService randomService;
 	
+	// TODO Model not needed here. remove Parameter and get path isntead of model
 	public ImageService(Model model) {
 		this.model = model;
 		this.randomService = new PseudoRandomService(this.getAssetPath());
@@ -19,6 +20,7 @@ public class ImageService {
 		return this.model.getAssetPath();
 	}
 	
+	//TODO remove getter, generate random asset is method needed here
 	public File getRandomAsset(NftAsset asset) {
 		this.randomService.getRandomAsset(asset, this.getAssetPath());
 		

@@ -16,6 +16,7 @@ import factories.NftAssetFactory;
 public class OSFileCreaterService implements FileCreaterService {
 	private final String directoryName = "output";
 
+	// TODO refactor into smaller methods to make cleaner code
 	@Override
 	public void createImage(NftAsset asset, String path) {
 		System.out.println("Here");

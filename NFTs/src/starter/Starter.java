@@ -8,21 +8,21 @@ import model.Model;
 public class Starter {
 
 	public static void main(String[] args) {
-		System.out.println("Start");
-		//
-
-		Starter.createBasicAsset();
+		System.out.println("Start!");
 		
-		Model model = new Model();
+		Starter.start();
 		
-		Frame frame = new Frame(600, 600, model);
-
-		
-		
-		//
 		System.out.println("End!");
 	}
 	
+	private static void start() {		
+		Model model = new Model();
+		
+		// TODO remove Frame size or set to realistic size
+		Frame frame = new Frame(600, 600, model);
+	}
+	
+	// TODO remove unused function
 	private static NftAsset createBasicAsset() {
 		NftAssetBlueprint nab = new NftAssetBlueprint();
 		

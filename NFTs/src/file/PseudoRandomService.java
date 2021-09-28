@@ -17,6 +17,8 @@ import entities.NftAsset;
 import entities.NftAssetComponent;
 import entities.NftAssetComponentEnum;
 
+// TODO refactor whole service to not violate clean code principles
+// have to work much more with FileService
 public class PseudoRandomService implements RandomService {
 	private String textFile = "/Nft_asset_ids.txt";
 	private FileService fileService;

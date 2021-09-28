@@ -9,6 +9,7 @@ import entities.NftAssetComponent;
 
 public interface FileService {
 	public HashMap<NftAssetComponentEnum, List<File>> getAllFiles(String path);
+	//TODO Remove unused method
 	public List<File> getAllFilesForComponent(NftAssetComponentEnum componentName);
 	public void saveImage(NftAsset asset);
 }

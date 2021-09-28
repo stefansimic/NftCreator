@@ -16,6 +16,7 @@ public class NftAssetComponent {
 		return this.name;
 	}
 
+	// TODO check if filename sets ending .pnn
 	public String getComponentFileId() {
 		return this.fileName;
 	}

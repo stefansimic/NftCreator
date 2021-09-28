@@ -18,6 +18,7 @@ public class NftAsset {
 		return this.assets;
 	}
 	
+	// TODO add private method to remove .png ending in id
 	public String getId() {
 		String id = "";
 		

@@ -6,6 +6,7 @@ import entities.NftAsset;
 import file.PseudoRandomService;
 import file.RandomService;
 
+// TODO delete obsolete service
 public class ImageService {
 	private Model model;
 	private RandomService randomService;

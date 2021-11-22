@@ -15,8 +15,8 @@ public class PseudoRandomService implements RandomService {
 		= new HashMap<NftAssetComponentEnum, List<File>>();
 	
 	public PseudoRandomService(String path) {
-		this.fileMap = this.fileService.getAllFiles(path);
 		this.createFileService();
+		this.fileMap = this.fileService.getAllFiles(path);
 	}
 	
 	public void createRandomAssets(NftAsset asset, int numberOfAssets) {

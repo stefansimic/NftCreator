@@ -22,7 +22,7 @@ public class NftAssetComponent {
 
 	public void setFileName(String fileName) {
 		if (!useDefaultFile) {
-			this.fileName = fileName;
+			this.fileName = fileName;;
 		}
 	}
 }

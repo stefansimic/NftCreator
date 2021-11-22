@@ -9,7 +9,7 @@ public class NftAssetComponent {
 		this.name = name;
 		this.useDefaultFile = useDefaultFile;
 
-		this.fileName = name + "00001";
+		this.fileName = name + "00001" + ".png";
 	}
 
 	public NftAssetComponentEnum getComponentName() {

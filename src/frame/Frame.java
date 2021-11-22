@@ -15,13 +15,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 import entities.NftAsset;
 import entities.NftAssetBlueprint;
@@ -36,8 +41,10 @@ public class Frame implements ActionListener {
 	private String assetPath = "";
 	
 	private NftAssetBlueprint blueprint;
+	private JCheckBox[] checkboxValues;
 	
 	private JTextField field;
+	private JFormattedTextField input;
     private BufferedImage img;
 
 	private int swingConstantNorth = 1;
@@ -52,6 +59,9 @@ public class Frame implements ActionListener {
         this.addTextInput();
         
         this.addPathButton();
+        
+        this.addSpinnerModel();
+        this.addCheckboxes();
         
         this.jFrame.pack();
         
@@ -70,7 +80,7 @@ public class Frame implements ActionListener {
 	
 	private void addPathButton() {
 		JButton button = new JButton("Speichern");
-		button.setPreferredSize(new Dimension(100, 600));
+		button.setPreferredSize(new Dimension(100, 100));
 		
 		button.addActionListener(this);  
 		
@@ -94,58 +104,19 @@ public class Frame implements ActionListener {
 		}
 	}
 	
-	private void addImage() {
-		this.jFrame.add(new NewImagePanel(
-				//"/resources/Lamia_and_the_Soldier.jpg"
-				"/Users/stefansimic/Pictures/Krieger/Spartaner_300.jpg"
-				));
-		this.jFrame.pack();
-		
-		this.jFrame.setVisible(true);
-	}
-	
 	@Override
 	public void actionPerformed(ActionEvent event) {		
 		this.assetPath = this.field.getText();
-		this.model.createRandomAssets(assetPath, this.createBasicBlueprint());
+		int timesToCreateAsset = Integer.parseInt(this.input.getText());
+		this.model.createRandomAssets(assetPath, this.createBasicBlueprint(), timesToCreateAsset);
 	}
 	
-	// image logic
-	
-	public class NewImagePanel extends JPanel {
-
-        private BufferedImage img;
-
-        public NewImagePanel(String path) {
-            try {
-                   
-            	   
-                img = ImageIO.read(TestImage.class.getResource(
-                		path
-                		// "/resources/Lamia_and_the_Soldier.jpg"
-                		));
-            } catch (IOException ex) {
-                System.out.println("Could not load image");
-            }
-        }
-
-        @Override
-        public Dimension getPreferredSize() {
-            return new Dimension(600, 600);
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
-        }
-    }
 	
 	private NftAssetBlueprint createBasicBlueprint() {
 		NftAssetBlueprint nab = new NftAssetBlueprint();
 		
 		for (int i = 0; i < NftAssetComponentEnum.values().length; i++) {
-			nab.setValue(NftAssetComponentEnum.values()[i], false);
+			nab.setValue(NftAssetComponentEnum.values()[i], this.checkboxValues[i].isSelected());
 		}
 		
 		return nab;
@@ -157,5 +128,37 @@ public class Frame implements ActionListener {
 		System.out.println(asset.getId());
 		
 		return asset;
+	}
+	
+	private void addSpinnerModel() {
+		 JLabel label;
+	    JFormattedTextField input;
+	    JPanel panel;
+
+	    BoxLayout layout = new BoxLayout(this.jFrame.getContentPane(), BoxLayout.Y_AXIS);
+	    this.jFrame.setLayout(layout);
+
+	    label = new JLabel("Wieviel sollen generiert werden (ganze Zahl):");
+	    this.input = new JFormattedTextField(1);
+	    this.input.setValue(1);
+	    this.input.setColumns(20);
+	    panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+	    panel.add(label);
+	    panel.add(this.input);
+	    this.jFrame.add(panel);
+
+	    this.jFrame.add(new JTextField());
+	    this.jFrame.pack();
+	    this.jFrame.setVisible(true);
+	}
+	
+	private void addCheckboxes() {
+		// NftAssetComponentEnum
+		this.checkboxValues = new JCheckBox[NftAssetComponentEnum.values().length];
+		
+		for (int i = 0; i < this.checkboxValues.length; i++) {
+			this.checkboxValues[i] = new JCheckBox(NftAssetComponentEnum.values()[i].name());
+			this.jFrame.add(this.checkboxValues[i]);
+		}
 	}
 }
